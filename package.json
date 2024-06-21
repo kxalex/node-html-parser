@@ -1,30 +1,32 @@
 {
-	"name": "node-html-parser",
+	"name": "@kxalex/node-html-parser",
 	"version": "6.1.14",
 	"description": "A very fast HTML parser, generating a simplified DOM, with basic element query support.",
-	"main": "dist/index.js",
+	"main": "dist/cjs/index.js",
 	"types": "dist/index.d.ts",
+	"module": "dist/index.js",
 	"scripts": {
 		"compile": "tsc",
-		"build": "npm run lint && npm run clean && npm run compile:cjs && npm run compile:amd",
-		"compile:cjs": "tsc -m commonjs",
+		"build": "npm run lint && npm run clean && npm run compile:esm && npm run compile:cjs && npm run compile:amd",
 		"watch": "npx tsc -m commonjs --watch --preserveWatchOutput",
+		"compile:cjs": "tsc -p tsconfig.cjs.json",
+		"compile:esm": "tsc -p tsconfig.json",
 		"compile:amd": "tsc -t es5 -m amd -d false --outFile ./dist/main.js",
 		"lint": "eslint ./src/*.ts ./src/**/*.ts",
 		"---------------": "",
-		"pretest": "cd ./test/ && yarn install && cd ..",
-		"test": "yarn run test:target",
-		"test:src": "cross-env TEST_TARGET=src yarn run test",
-		"test:dist": "cross-env TEST_TARGET=dist yarn run test",
+		"pretest": "cd ./test/ && pnpm install && cd ..",
+		"test": "pnpm run test:target",
+		"test:src": "cross-env TEST_TARGET=src pnpm run test",
+		"test:dist": "cross-env TEST_TARGET=dist pnpm run test",
 		"benchmark": "node ./test/benchmark/compare.mjs",
 		"---------------  ": "",
 		"clean": "npx rimraf ./dist/",
-		"clean:global": "yarn run clean && npx rimraf yarn.lock test/yarn.lock test/node_modules node_modules",
-		"reset": "yarn run clean:global && yarn install && yarn build",
+		"clean:global": "pnpm run clean && npx rimraf pnpm.lock test/pnpm.lock test/node_modules node_modules",
+		"reset": "pnpm run clean:global && pnpm install && pnpm build",
 		"--------------- ": "",
 		"test:target": "mocha --recursive \"./test/tests\"",
-		"test:ci": "cd test && yarn install && cd .. && cross-env TEST_TARGET=dist yarn run test:target",
-		"posttest": "yarn run benchmark",
+		"test:ci": "cd test && pnpm install && cd .. && cross-env TEST_TARGET=dist pnpm run test:target",
+		"posttest": "pnpm run benchmark",
 		"prepare": "npm run build",
 		"release": "standard-version && git push --follow-tags origin main"
 	},
@@ -43,14 +45,15 @@
 	"author": "Xiaoyi Shi <ashi009@gmail.com>",
 	"contributors": [
 		"taoqf <tao_qiufeng@126.com>",
-		"Ron S. <ron@nonara.com>"
+		"Ron S. <ron@nonara.com>",
+		"Oleksi S. <kxalex@gmail.com>"
 	],
 	"license": "MIT",
 	"publishConfig": {
 		"registry": "https://registry.npmjs.org"
 	},
 	"dependencies": {
-		"css-select": "^5.1.0",
+		"@kxalex/css-select": "github:kxalex/css-select",
 		"he": "1.2.0"
 	},
 	"devDependencies": {
@@ -105,11 +108,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/taoqf/node-fast-html-parser.git"
+		"url": "https://github.com/kxalex/node-fast-html-parser.git"
 	},
 	"bugs": {
-		"url": "https://github.com/taoqf/node-fast-html-parser/issues"
+		"url": "https://github.com/kxalex/node-fast-html-parser/issues"
 	},
-	"homepage": "https://github.com/taoqf/node-fast-html-parser",
-	"sideEffects": false
+	"homepage": "https://github.com/kxalex/node-fast-html-parser",
+	"sideEffects": false,
+	"packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }

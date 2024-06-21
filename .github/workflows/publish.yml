@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js 14.x to publish to npmjs.org
         uses: actions/setup-node@v1
@@ -20,15 +20,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Packages
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: yarn build
+        run: pnpm build
         env:
           CI: true
 
       - name: Test
-        run: yarn run test:ci
+        run: pnpm run test:ci
         env:
           CI: true
 
@@ -36,7 +36,7 @@ jobs:
         run: npx extract-changelog-release > RELEASE_BODY.md
 
       - name: Publish to NPM
-        run: yarn publish --non-interactive
+        run: pnpm publish --non-interactive
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
