@@ -28,7 +28,7 @@
 		"test:ci": "cd test && pnpm install && cd .. && cross-env TEST_TARGET=dist pnpm run test:target",
 		"posttest": "pnpm run benchmark",
 		"prepare": "npm run build",
-		"release": "standard-version && git push --follow-tags origin main"
+		"release": "release-please github-release && git push --follow-tags origin main"
 	},
 	"keywords": [
 		"html",
@@ -53,15 +53,13 @@
 		"registry": "https://registry.npmjs.org"
 	},
 	"dependencies": {
-		"@kxalex/css-select": "github:kxalex/css-select",
+		"@kxalex/css-select": "^5.1.0",
 		"he": "1.2.0"
 	},
 	"devDependencies": {
-		"@types/entities": "latest",
 		"@types/he": "latest",
 		"@types/node": "latest",
 		"@typescript-eslint/eslint-plugin": "latest",
-		"@typescript-eslint/eslint-plugin-tslint": "latest",
 		"@typescript-eslint/parser": "latest",
 		"blanket": "latest",
 		"boolbase": "^1.0.0",
@@ -87,7 +85,7 @@
 		"saxes": "^6.0.0",
 		"should": "latest",
 		"spec": "latest",
-		"standard-version": "^9.5.0",
+		"release-please": "latest",
 		"travis-cov": "latest",
 		"ts-node": "^10.9.1",
 		"typescript": "latest"
