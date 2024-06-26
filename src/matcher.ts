@@ -1,4 +1,4 @@
-import { Adapter /*, Predicate*/ } from 'css-select/lib/types';
+import { Adapter /*, Predicate*/ } from '@kxalex/css-select/lib/types';
 import HTMLElement from './nodes/html';
 import Node from './nodes/node';
 import NodeType from './nodes/type';

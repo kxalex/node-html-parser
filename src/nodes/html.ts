@@ -1,4 +1,4 @@
-import { selectAll, selectOne } from 'css-select';
+import { selectAll, selectOne } from '@kxalex/css-select';
 import he from 'he';
 import arr_back from '../back';
 import Matcher from '../matcher';
@@ -584,27 +584,27 @@ export default class HTMLElement extends Node {
 	 * @returns {HTMLElement | null} the element with the given id or null if not found
 	 */
 	public closest(selector: string): HTMLElement | null {
-		type Predicate = (node: Node) => node is HTMLElement;
+		// type Predicate = (node: Node) => node is HTMLElement;
 
 		const mapChild = new Map<Node, Node>();
 		let el = this as Node;
 		let old = null as Node;
-		function findOne(test: Predicate, elems: Node[]) {
-			let elem = null as HTMLElement | null;
-
-			for (let i = 0, l = elems.length; i < l && !elem; i++) {
-				const el = elems[i];
-				if (test(el)) {
-					elem = el;
-				} else {
-					const child = mapChild.get(el);
-					if (child) {
-						elem = findOne(test, [child]);
-					}
-				}
-			}
-			return elem;
-		}
+		// function findOne(test: Predicate, elems: Node[]) {
+		// 	let elem = null as HTMLElement | null;
+		//
+		// 	for (let i = 0, l = elems.length; i < l && !elem; i++) {
+		// 		const el = elems[i];
+		// 		if (test(el)) {
+		// 			elem = el;
+		// 		} else {
+		// 			const child = mapChild.get(el);
+		// 			if (child) {
+		// 				elem = findOne(test, [child]);
+		// 			}
+		// 		}
+		// 	}
+		// 	return elem;
+		// }
 		while (el) {
 			mapChild.set(el, old);
 			old = el;
@@ -623,14 +623,14 @@ export default class HTMLElement extends Node {
 					getSiblings(node: Node) {
 						return [node];
 					},
-					findOne,
-					findAll(): Node[] {
-						return [];
-					},
+					// findOne,
+					// findAll(): Node[] {
+					// 	return [];
+					// },
 				},
 			});
 			if (e) {
-				return e as HTMLElement;
+				return e;
 			}
 			el = el.parentNode;
 		}
